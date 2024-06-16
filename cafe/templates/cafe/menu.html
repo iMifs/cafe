@@ -1,0 +1,143 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Homepage</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: url("{% static 'images/back.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }	
+		
+		.header {
+		padding: 60px 0;
+		background: url("{% static '/images/header.png' %}") no-repeat center center;
+		background-size: cover;
+		text-align: center;
+		height: 300px;
+}
+
+.footer {
+    background-color: #f8f9fa;
+} 
+		</style>
+</head>
+<body>
+
+    <!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <a class="navbar-brand" href="{% url 'index' %}">РОМАШКА</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ml-auto">
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'index' %}">Главная</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'menu' %}">Наше меню</a>
+               </li>
+               <li class="nav-item active">
+                   <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
+               </li>
+               {% if user.is_authenticated %}
+               <li class="nav-item">
+             <!--      <a class="nav-link" href="{% url 'auth_logout' %}">Выйти</a> -->
+			 <a id="logout-link" class="nav-link" href="#">Выйти</a>
+               </li>
+               {% else %}
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'auth_login' %}">Войти</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'registration_register' %}">Регистрация</a>
+               </li>
+               {% endif %}
+           </ul>
+       </div>
+   </nav>
+	
+	<form id="logout-form" method="post" action="{% url 'auth_logout' %}" style="display: none;">
+    {% csrf_token %}
+</form>
+
+<script>
+    document.getElementById('logout-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('logout-form').submit();
+    });
+</script>
+
+    <header class="header bg-primary text-white text-center">
+        <div class="container">
+            <h1>Наше меню</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="{% static 'images/menu1.png' %}" alt="Блюдо 1">
+                <p>Зеленый чай</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu2.png' %}" alt="Блюдо 2">
+                <p>Черный чай</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu3.png' %}" alt="Блюдо 3">
+                <p>Американо</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu4.png' %}" alt="Блюдо 4">
+                <p>Блинчики с джемом</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu5.png' %}" alt="Блюдо 5">
+                <p>Оладья с ягодами</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu6.png' %}" alt="Блюдо 6">
+                <p>Каша со свежими ягодами</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu7.png' %}" alt="Блюдо 7">
+                <p>Яичница из двух яиц</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu8.png' %}" alt="Блюдо 8">
+                <p>Салат "Лето"</p>
+            </div>
+            <div class="menu-item">
+                <img src="{% static 'images/menu9.png' %}" alt="Блюдо 9">
+                <p>Сэндвич</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="m-0">Адрес: Москва, улица Пушкина, дом 16
+                <br>
+                Телефон: +7 000 000 00 00
+                <br>
+                &copy; 2024 Ромашка</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
